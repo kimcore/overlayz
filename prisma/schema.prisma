@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       String    @id
+    keys     Key[]
+    sessions Session[]
+    overlays Overlay[]
+
+    twitch String?
+    chzzk  String?
+
+    @@map("users")
+}
+
+model Session {
+    id             String @id
+    user           User   @relation(fields: [user_id], references: [id])
+    user_id        String
+    active_expires BigInt
+    idle_expires   BigInt
+
+    @@map("sessions")
+}
+
+model Key {
+    id              String  @id
+    user            User    @relation(fields: [user_id], references: [id])
+    user_id         String
+    hashed_password String?
+
+    @@map("keys")
+}
+
+enum OverlayType {
+    CHAT
+}
+
+model Overlay {
+    id      String      @id
+    user    User        @relation(fields: [user_id], references: [id])
+    user_id String
+    name    String
+    type    OverlayType
+    config  Json
+    created DateTime    @default(now())
+
+    @@map("overlays")
+}

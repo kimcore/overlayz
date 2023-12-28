@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .text-gradient {
+        @apply text-transparent bg-clip-text bg-gradient-to-b from-white to-[#aeaeae];
+    }
+}
+
+:root {
+    --background: white;
+    --foreground: black;
+}
+
+html.dark {
+    @apply bg-[#101010] text-[#f5f5f5];
+}
