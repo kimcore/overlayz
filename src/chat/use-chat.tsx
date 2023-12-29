@@ -282,8 +282,13 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
                 ws.send(`USER ${justinfan} 8 * :${justinfan}`)
                 ws.send(`JOIN #${twitch.login}`)
             },
-            onMessage: (_, event) => {
+            onMessage: (ws, event) => {
                 const data = event.data
+
+                if (data == "PING :tmi.twitch.tv") {
+                    ws.send("PONG :tmi.twitch.tv")
+                    return
+                }
 
                 if (!data.includes("PRIVMSG")) return
 
