@@ -1,5 +1,4 @@
-import {Button, Tooltip} from "@nextui-org/react"
-import {SiNaver} from "react-icons/si"
+import {Button} from "@nextui-org/react"
 import {FaTwitch} from "react-icons/fa"
 
 export function Login() {

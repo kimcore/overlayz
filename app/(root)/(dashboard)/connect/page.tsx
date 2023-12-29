@@ -1,5 +1,5 @@
 import {getSession} from "@/auth/lucia"
-import {getTwitchUserById, twitch} from "@/utils/twitch"
+import {getTwitchUserById} from "@/utils/twitch"
 import Platform from "./platform"
 import {ChzzkClient} from "chzzk"
 

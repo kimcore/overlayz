@@ -36,7 +36,7 @@ export default async function Layout({children}) {
         </head>
         <body>
         <Providers>
-            {session ? children: <Login/>}
+            {session ? children : <Login/>}
         </Providers>
         </body>
         </html>

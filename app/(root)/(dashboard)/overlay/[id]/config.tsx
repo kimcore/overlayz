@@ -15,7 +15,7 @@ import {
 } from "@nextui-org/react"
 import {ChatBoxConfig, fontFaces} from "@/app/o/config"
 import {Editor} from "@monaco-editor/react"
-import {FaArrowLeft, FaCopy, FaLayerGroup, FaLock, FaSave} from "react-icons/fa"
+import {FaArrowLeft, FaCopy, FaLayerGroup, FaSave} from "react-icons/fa"
 import {toast} from "sonner"
 import NextLink from "next/link"
 import {RxReset} from "react-icons/rx"

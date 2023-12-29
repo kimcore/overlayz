@@ -1,4 +1,4 @@
-import ChatBox, {ChatBoxProps} from "../chat-box"
+import ChatBox, {ChatBoxProps} from "@/chat/chat-box"
 import {ChatBoxConfig} from "@/app/o/config"
 import {notFound} from "next/navigation"
 import {getTwitchChannelBadges, getTwitchGlobalBadges, getTwitchUserById} from "@/utils/twitch"

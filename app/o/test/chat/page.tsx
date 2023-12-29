@@ -1,7 +1,7 @@
 "use client"
 
 import {useLocalstorageState} from "rooks"
-import ChatBox from "@/app/o/chat-box"
+import ChatBox from "@/chat/chat-box"
 import {ChatBoxConfig} from "@/app/o/config"
 
 export default function ChatTestPage() {

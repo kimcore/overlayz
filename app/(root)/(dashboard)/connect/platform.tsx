@@ -31,6 +31,7 @@ export default function Platform({user, platform}) {
             }
         })
     }
+
     return (
         <Card className="w-64">
             <CardBody className="justify-between p-8 gap-4">

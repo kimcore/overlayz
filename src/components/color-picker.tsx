@@ -1,5 +1,5 @@
 import {Button, Popover, PopoverContent, PopoverTrigger} from "@nextui-org/react"
-import {HexAlphaColorPicker, HexColorInput, RgbaStringColorPicker} from "react-colorful"
+import {HexAlphaColorPicker, HexColorInput} from "react-colorful"
 import {useEffect, useState} from "react"
 import {TbHash} from "react-icons/tb"
 import {useDebounce} from "rooks"
