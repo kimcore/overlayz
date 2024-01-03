@@ -29,7 +29,7 @@ const defaultCss = `
 .badge,
 .colon,
 .name {
-  display: inline-block;
+  display: inline;
   vertical-align: top
 }
 #log .meta {
