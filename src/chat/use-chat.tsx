@@ -24,7 +24,7 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
     const lastSetTimestampRef = useRef<number>(0)
     const pendingChatListRef = useRef<Chat[]>([])
     const [chatList, setChatList] = useState<Chat[]>([])
-    const [chzzkAccessToken, setChzzkAccessToken] = useState<string>(chzzk.accessToken)
+    const [chzzkAccessToken, setChzzkAccessToken] = useState<string>(chzzk?.accessToken ?? null)
 
     function appendChats(chats: Chat[]) {
         pendingChatListRef.current = [...pendingChatListRef.current, ...chats].slice(-1 * maxChatLength)
