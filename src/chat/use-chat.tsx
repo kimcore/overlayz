@@ -5,6 +5,7 @@ import {ChatCmd, ChatExtras, Profile} from "chzzk"
 import {ChatBoxProps} from "@/chat/chat-box"
 import {platformNames} from "@/utils/platforms"
 import useWebSocket from "@/chat/use-websocket"
+import {checkAccessToken} from "@/app/o/actions"
 
 function colorFromString(seed: string) {
     const index = seed.split("")
@@ -23,6 +24,7 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
     const lastSetTimestampRef = useRef<number>(0)
     const pendingChatListRef = useRef<Chat[]>([])
     const [chatList, setChatList] = useState<Chat[]>([])
+    const [chzzkAccessToken, setChzzkAccessToken] = useState<string>(chzzk.accessToken)
 
     function appendChats(chats: Chat[]) {
         pendingChatListRef.current = [...pendingChatListRef.current, ...chats].slice(-1 * maxChatLength)
@@ -166,6 +168,21 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
     }
 
     if (chzzk) {
+        if (chzzk.accessToken == null) {
+            useEffect(() => {
+                let interval = null
+
+                interval = setInterval(() => {
+                    checkAccessToken(chzzk.channelId).then(accessToken => {
+                        if (accessToken != null) {
+                            clearInterval(interval)
+                            setChzzkAccessToken(accessToken)
+                        }
+                    })
+                }, 5000)
+            }, [])
+        }
+
         const defaults = {
             cid: chzzk.chatChannelId,
             svcid: "game",
@@ -211,7 +228,7 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
 
                 ws.send(JSON.stringify({
                     bdy: {
-                        accTkn: chzzk.accessToken,
+                        accTkn: chzzkAccessToken,
                         auth: "READ",
                         devType: 2001,
                         uid: null
@@ -267,7 +284,8 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
             onClose: () => {
                 worker?.postMessage("stop")
                 worker?.terminate()
-            }
+            },
+            shouldConnect: chzzkAccessToken != null
         })
     }
 

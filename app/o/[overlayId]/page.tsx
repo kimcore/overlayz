@@ -3,12 +3,13 @@ import {ChatBoxConfig} from "@/app/o/config"
 import {notFound} from "next/navigation"
 import {getTwitchChannelBadges, getTwitchGlobalBadges, getTwitchUserById} from "@/utils/twitch"
 import prisma from "@/database/prisma"
+import {chzzk, retrieveChzzkAccessToken} from "@/utils/chzzk"
 import "../chat.css"
 
 export const dynamic = "force-dynamic"
 
 export default async function ChatPage({params: {overlayId}}) {
-    const {signal} = new AbortController()
+
 
     const overlay = await prisma.overlay.findFirst({
         where: {
@@ -28,19 +29,16 @@ export default async function ChatPage({params: {overlayId}}) {
     if (overlay.user.chzzk && config.showChzzk) {
         const channelId = overlay.user.chzzk
 
-        const chatChannelId = await fetch(
-            `https://api.chzzk.naver.com/polling/v1/channels/${channelId}/live-status`,
-            {signal}
-        ).then(r => r.json()).then(data => data['content']?.['chatChannelId'])
+        const liveStatus = await chzzk.live.status(channelId).catch(() => null)
+        const isLive = liveStatus?.status == "OPEN"
+        const chatChannelId = liveStatus?.chatChannelId
 
         if (!chatChannelId) return notFound()
 
-        const accessToken = await fetch(
-            `https://comm-api.game.naver.com/nng_main/v1/chats/access-token?channelId=${chatChannelId}&chatType=STREAMING`,
-            {signal}
-        ).then(r => r.json()).then(data => data['content']['accessToken'])
+        const accessToken = isLive ? await retrieveChzzkAccessToken(chatChannelId) : null
 
         props.chzzk = {
+            channelId,
             chatChannelId,
             accessToken
         }

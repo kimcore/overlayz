@@ -1,14 +1,15 @@
 "use client"
 
-import {useCallback, useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 import {buildCss, ChatBoxConfig} from "@/app/o/config"
 import ChatRow from "@/chat/chat-row"
 import useChatList from "@/chat/use-chat"
 
 export type ChatBoxProps = {
     chzzk?: {
+        channelId: string
         chatChannelId: string
-        accessToken: string
+        accessToken?: string
     },
     twitch?: {
         login: string
@@ -22,19 +23,6 @@ export default function ChatBox(props: ChatBoxProps) {
     const [config, setConfig] = useState(props.config)
 
     const chatList = useChatList(props)
-
-    const handleObsStreamingStarted = useCallback(() => {
-        window.location.reload()
-    }, [])
-
-    // requires obs 30.0.1+
-    useEffect(() => {
-        window.addEventListener("obsStreamingStarted", handleObsStreamingStarted)
-
-        return () => {
-            window.removeEventListener("obsStreamingStarted", handleObsStreamingStarted)
-        }
-    }, [handleObsStreamingStarted])
 
     useEffect(() => {
         setConfig(props.config)
