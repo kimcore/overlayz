@@ -8,8 +8,8 @@ function ChatRow({chat, config}: { chat: Chat, config: ChatBoxConfig }) {
     return (
         <div data-from={nickname} className={platform} style={{"--color": color} as React.CSSProperties}>
             <span className="meta" style={{color}}>
-                {config.showBadge && badges.map((badge, i) => <img key={i} alt="" className="badge" src={badge}/>)}
                 {config.showPlatform && <img className="badge" alt="" src={`/assets/${platform}.svg`}/>}
+                {config.showBadge && badges.map((badge, i) => <img key={i} alt="" className="badge" src={badge}/>)}
                 {config.showName && <span className="name">{nickname}</span>}
                 {config.showColon && <span className="colon">:</span>}
             </span>
