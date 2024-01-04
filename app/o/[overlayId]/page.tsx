@@ -9,8 +9,6 @@ import "../chat.css"
 export const dynamic = "force-dynamic"
 
 export default async function ChatPage({params: {overlayId}}) {
-
-
     const overlay = await prisma.overlay.findFirst({
         where: {
             id: overlayId
@@ -35,9 +33,10 @@ export default async function ChatPage({params: {overlayId}}) {
 
         if (!chatChannelId) return notFound()
 
-        const accessToken = isLive ? await retrieveChzzkAccessToken(chatChannelId) : null
+        const accessToken = await retrieveChzzkAccessToken(chatChannelId)
 
         props.chzzk = {
+            isLive,
             channelId,
             chatChannelId,
             accessToken

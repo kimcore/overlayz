@@ -7,9 +7,10 @@ import useChatList from "@/chat/use-chat"
 
 export type ChatBoxProps = {
     chzzk?: {
+        isLive: boolean
         channelId: string
         chatChannelId: string
-        accessToken?: string
+        accessToken: string
     },
     twitch?: {
         login: string

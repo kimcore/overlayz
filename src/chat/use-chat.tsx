@@ -168,7 +168,7 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
     }
 
     if (chzzk) {
-        if (chzzk.accessToken == null) {
+        if (!chzzk.isLive) {
             useEffect(() => {
                 let interval = null
 
@@ -180,6 +180,10 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
                         }
                     })
                 }, 5000)
+
+                return () => {
+                    clearInterval(interval)
+                }
             }, [])
         }
 
@@ -285,7 +289,7 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
                 worker?.postMessage("stop")
                 worker?.terminate()
             },
-            shouldConnect: chzzkAccessToken != null
+            reconnectKeys: [chzzkAccessToken]
         })
     }
 
