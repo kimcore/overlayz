@@ -41,7 +41,9 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
         const nickname = profile.nickname
         const badge = profile.badge?.imageUrl
         const donationBadge = profile.streamingProperty?.realTimeDonationRanking?.badge?.imageUrl
-        const badges = [badge, donationBadge].concat(
+        // @ts-ignore
+        const subscriptionBadge = profile.streamingProperty?.subscription?.badge?.imageUrl
+        const badges = [badge, subscriptionBadge, donationBadge].concat(
             profile.activityBadges?.filter(badge => badge.activated)?.map(badge => badge.imageUrl) ?? []
         ).filter(badge => badge != null)
         const channelId = raw["cid"] || raw["channelId"]
