@@ -36,8 +36,8 @@ dependencies:
     specifier: ^4.1.1
     version: 4.1.1
   chzzk:
-    specifier: ^1.6.0
-    version: 1.6.0
+    specifier: ^1.8.0
+    version: 1.8.0
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -3188,8 +3188,8 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /chzzk@1.6.0:
-    resolution: {integrity: sha512-lwF5DgaIWVhqIBvbz1f6ve9dV5JpQa0IvblBWYAeEITL71919F6Wnp6jTdKm7/OI7jI0FLTow/cqTxSGp2FEvQ==}
+  /chzzk@1.8.0:
+    resolution: {integrity: sha512-p4PAI0dl+WM40H7m416a3a2RSP5CJP7zu8fLaXkFHvZRFcscQ9ERLkit7Wt3laQQVjLSgagxI7hoRcQEmir0VA==}
     dependencies:
       isomorphic-ws: 5.0.0(ws@8.16.0)
       ws: 8.16.0
