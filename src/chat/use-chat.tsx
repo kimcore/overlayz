@@ -270,8 +270,11 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
                     case ChatCmd.CHAT:
                         const isRecent = json.cmd == ChatCmd.RECENT_CHAT
                         const chats: Chat[] = (isRecent ? json['bdy']['messageList'] : json['bdy'])
-                            .filter((chat: any) => (chat['msgTypeCode'] || chat['messageTypeCode']) == 1)
-                            .filter((chat: any) => !((chat['msgStatusType'] || chat['messageStatusType']) == "HIDDEN"))
+                            .filter((chat: any) =>
+                                (chat['msgTypeCode'] || chat['messageTypeCode']) == 1 &&
+                                (chat['msgStatusType'] || chat['messageStatusType']) != "HIDDEN" &&
+                                !!chat['profile']
+                            )
                             .map(convertChzzkChat)
 
                         if (isRecent) {
