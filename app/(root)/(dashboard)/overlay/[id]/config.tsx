@@ -13,7 +13,7 @@ import {
     Switch,
     Tooltip
 } from "@nextui-org/react"
-import {ChatBoxConfig, fontFaces} from "@/app/o/config"
+import {fontFaces} from "@/app/o/config"
 import {Editor} from "@monaco-editor/react"
 import {FaArrowLeft, FaCopy, FaLayerGroup, FaSave} from "react-icons/fa"
 import {toast} from "sonner"
@@ -65,7 +65,7 @@ function ConfigSwitch({label, property, platform = null, config, setConfig, clas
 }
 
 export function ChatBoxConfig({overlay}) {
-    const [config, setConfig] = useLocalstorageState<ChatBoxConfig>("chat-config", overlay.config)
+    const [config, setConfig] = useLocalstorageState("chat-config", overlay.config)
     const [availableFonts, setAvailableFonts] = useState(null)
     const {refresh} = useRouter()
 
