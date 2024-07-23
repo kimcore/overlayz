@@ -21,7 +21,7 @@
         "@twurple/api": "^7.0.6",
         "@twurple/auth": "^7.0.6",
         "animate.css": "^4.1.1",
-        "chzzk": "^1.8.4",
+        "chzzk": "^1.10.2",
         "clsx": "^2.0.0",
         "framer-motion": "^10.16.16",
         "lucia": "^2.7.6",

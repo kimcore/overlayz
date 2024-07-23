@@ -1,5 +1,5 @@
 import {Fragment, useCallback, useEffect, useRef, useState} from "react"
-import {nicknameColors, testChats} from "./constants"
+import {cheatKeyColors, nicknameColors, testChats} from "./constants"
 import {Chat} from "./types"
 import {ChatCmd, ChatExtras, Profile} from "chzzk"
 import {ChatBoxProps} from "@/chat/chat-box"
@@ -12,6 +12,11 @@ function colorFromString(seed: string) {
         .map((c: string) => c.charCodeAt(0))
         .reduce((a: number, b: number) => a + b, 0) % nicknameColors.length
     return nicknameColors[index]
+}
+
+function cheatKeyColorFromString(code: string) {
+    const colorCode = parseInt(code.replace("CC", ""))
+    return cheatKeyColors[colorCode - 1]
 }
 
 function randomUID() {
@@ -41,13 +46,15 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
         const nickname = profile.nickname
         const badge = profile.badge?.imageUrl
         const donationBadge = profile.streamingProperty?.realTimeDonationRanking?.badge?.imageUrl
-        // @ts-ignore
         const subscriptionBadge = profile.streamingProperty?.subscription?.badge?.imageUrl
         const badges = [badge, subscriptionBadge, donationBadge].concat(
             profile.activityBadges?.filter(badge => badge.activated)?.map(badge => badge.imageUrl) ?? []
         ).filter(badge => badge != null)
         const channelId = raw["cid"] || raw["channelId"]
-        const color = profile.title?.color ?? colorFromString((profile.userIdHash + channelId))
+        const hasCheatKey = profile.streamingProperty?.nicknameColor?.colorCode !== "CC000"
+        const color = profile.title?.color ?? hasCheatKey ?
+            cheatKeyColorFromString(profile.streamingProperty?.nicknameColor?.colorCode) :
+            colorFromString(profile.userIdHash + channelId)
         const emojis = extras?.emojis ?? null
 
         const message = (

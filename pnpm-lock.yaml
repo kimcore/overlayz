@@ -39,8 +39,8 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       chzzk:
-        specifier: ^1.8.4
-        version: 1.8.4
+        specifier: ^1.10.2
+        version: 1.10.2
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
@@ -1388,8 +1388,8 @@ packages:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
 
-  chzzk@1.8.4:
-    resolution: {integrity: sha512-t+wqmpjsr3tFXX+U4AZVUl9/WWkCYtFH6Qq6DGoQBhWxIcby1vDoAQrhPXGnyhjsuknnOC0AErp9+pFPGo1kuw==}
+  chzzk@1.10.2:
+    resolution: {integrity: sha512-OqdRi6j277e6TwdG1Y4u9TbIbbS6HdE7s/R+rdzyjxZvj7zM40txgfvUh2VFHmtWB5BzdWN8EP49+KCrt2enGA==}
 
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
@@ -4502,7 +4502,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  chzzk@1.8.4:
+  chzzk@1.10.2:
     dependencies:
       isomorphic-ws: 5.0.0(ws@8.16.0)
       ws: 8.16.0
