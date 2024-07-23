@@ -52,9 +52,9 @@ export default function useChatList(props: ChatBoxProps, maxChatLength: number =
         ).filter(badge => badge != null)
         const channelId = raw["cid"] || raw["channelId"]
         const hasCheatKey = profile.streamingProperty?.nicknameColor?.colorCode !== "CC000"
-        const color = profile.title?.color ?? hasCheatKey ?
+        const color = profile.title?.color ?? (hasCheatKey ?
             cheatKeyColorFromString(profile.streamingProperty?.nicknameColor?.colorCode) :
-            colorFromString(profile.userIdHash + channelId)
+            colorFromString(profile.userIdHash + channelId))
         const emojis = extras?.emojis ?? null
 
         const message = (
